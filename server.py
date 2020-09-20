@@ -1,5 +1,5 @@
 """
-    KIaguya - The opensource instant messaging framework.
+    Kaguya - The opensource instant messaging framework.
     ---
     Copyright 2020 Star Inc.(https://starinc.xyz)
 

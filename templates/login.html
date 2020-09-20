@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Kaguya Authorization Example - Login</title>
+    <meta charset="utf-8" />
+    <style>
+        html,
+        body {
+            background: rgb(25, 25, 125);
+        }
+
+        #login-box {
+            width: 30%;
+            margin: 100px auto;
+            padding: 0 20px;
+            background: #fff;
+            border-radius: 10px;
+        }
+
+        #login-box h1 {
+            color: #000;
+            font-weight: normal;
+            text-align: center;
+        }
+
+        #login-box p {
+            color: #333;
+            font-weight: normal;
+            text-align: center;
+        }
+
+        #status {
+            color: rebeccapurple !important;
+        }
+
+        #logo,
+        #logo img {
+            width: 100px;
+            height: auto;
+            margin: 15px auto;
+        }
+
+        .login-input-box {
+            width: 70%;
+            margin: 0 auto;
+        }
+
+        .login-input {
+            width: 100%;
+            height: 35px;
+            font-size: 20px;
+            color: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0);
+            border: 1px rgba(0, 0, 0, 0.1) solid;
+            padding: 0 10px;
+            margin: 5px 0;
+        }
+
+        .login-submit-box {
+            text-align: center;
+        }
+
+        #login-submit {
+            width: 100px;
+            height: 45px;
+            font-size: 20px;
+            color: #fff;
+            background: rgba(99, 35, 219, 0.9);
+            border: 1px rgba(0, 0, 0, 0.1) solid;
+            border-radius: 10px;
+            margin: 25px auto;
+            cursor: pointer;
+        }
+
+        .login-input:hover {
+            color: rgba(0, 0, 0, 1);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="login-box">
+        <div id="logo">
+            <img src={{ url_for('static', filename='logo.png') }} />
+        </div>
+        <h1>Kaguya</h1>
+        <p>Authorization Example</p>
+        <p id="status"></p>
+        <form id="login-form" method="POST">
+            <div class="login-input-box">
+                <input id="username" class="login-input" placeholder="Username" type="text" required />
+                <input id="password" class="login-input" placeholder="Password" type="password" required />
+            </div>
+            <div class="login-input-box login-submit-box">
+                <input id="login-submit" value="Login" type="submit" />
+            </div>
+        </form>
+    </div>
+    <script src="https://cdn.starinc.xyz/static/public_assets/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $("#login-form").submit((e) => {
+            e.preventDefault();
+            $("#status").text("Loading...");
+            $.post({
+                url: "/authorize",
+                data: JSON.stringify({
+                    username: $("#username").val(),
+                    password: $("#password").val()
+                }),
+                contentType: 'application/json; charset=utf-8'
+            }).then((xhr => {
+                if (xhr.status === 200) location.assign("/success");
+                else $("#status").text(xhr.reason);
+            }));
+        });
+    </script>
+</body>
+
+</html>

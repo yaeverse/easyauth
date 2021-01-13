@@ -1,7 +1,7 @@
 """
     Kaguya - The opensource instant messaging framework.
     ---
-    Copyright 2020 Star Inc.(https://starinc.xyz)
+    Copyright 2021 Star Inc.(https://starinc.xyz)
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ def about():
     <b>Kaguya - Authorizatn</b>
     <hr />
     <p>The API Server is used for authorize and verify the identity for Kaguya.</p>
-    <p>(c)2020 Star Inc.</p>
+    <p>(c)2021 Star Inc.</p>
     """
 
 

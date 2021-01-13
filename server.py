@@ -16,11 +16,14 @@
     limitations under the License.
 """
 
-from flask import Flask, request, Response, render_template, jsonify, make_response
+from flask import Flask, request, Response, jsonify
+from flask_cors import CORS
 
 import time
 
 app = Flask(__name__)
+
+CORS(app)
 
 users = {
     "admin": "admin",
@@ -31,27 +34,16 @@ tokens = {}
 
 
 @app.route('/')
-def index():
-    return render_template("login.html")
-
-
-@app.route('/about')
 def about():
     return """
-    Kaguya - Authorization
-    ===
-    The API Server is used for authorize and verify the identity for Kaguya.
-
-    (c)2020 Star Inc.
+    <b>Kaguya - Authorizatn</b>
+    <hr />
+    <p>The API Server is used for authorize and verify the identity for Kaguya.</p>
+    <p>(c)2020 Star Inc.</p>
     """
 
 
-@app.route('/success')
-def success():
-    return "Success"
-
-
-@app.route('/authorize', methods=['POST'])
+@app.route('/api/authorize', methods=['POST'])
 def authorize():
     if request.is_json:
         data = request.get_json()
@@ -62,14 +54,12 @@ def authorize():
             })
         if data["username"] in users:
             if data["password"] == users[data["username"]]:
-                response = make_response(jsonify({
-                    "status": 200,
-                    "reason": "Success"
-                }))
                 token = str(hash(time.time()))
                 tokens[token] = data["username"]
-                response.set_cookie("kaguya_token", token)
-                return response
+                return jsonify({
+                    "status": 200,
+                    "reason": token
+                })
         return jsonify({
             "status": 401,
             "reason": "Unauthorized"
@@ -81,8 +71,8 @@ def authorize():
         )
 
 
-@app.route('/verify', methods=['POST'])
-def issueToken():
+@app.route('/api/verify', methods=['POST'])
+def verify():
     if request.is_json:
         data = request.get_json()
         if "authToken" not in data:

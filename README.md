@@ -2,9 +2,15 @@
 
 The opensource instant messaging framework.
 
-![logo](static/logo.svg)
+![logo](logo.svg)
 
-## Execute
+# Authorized  Flow
+
+All of Kaguya needs to do that transfers the messages only, keep clean while authorized.
+
+![Flow](flow.svg)
+
+## Development Execute
 
 ```shell
 FLASK_APP=server.py flask run

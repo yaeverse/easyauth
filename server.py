@@ -56,10 +56,14 @@ def authorize():
             if data["password"] == users[data["username"]]:
                 token = str(hash(time.time()))
                 tokens[token] = data["username"]
-                return jsonify({
+                response = jsonify({
                     "status": 200,
                     "reason": token
                 })
+                if data.get("cookie") == "true":
+                    response.set_cookie("kaguya_token", token)
+                else:
+                    return response
         return jsonify({
             "status": 401,
             "reason": "Unauthorized"

@@ -60,7 +60,7 @@ def authorize():
                     "status": 200,
                     "reason": token
                 })
-                if data.get("cookie") == "true":
+                if data.get("cookie"):
                     response.set_cookie("kaguya_token", token)
                 else:
                     return response

@@ -23,7 +23,7 @@ import time
 
 app = Flask(__name__)
 
-CORS(app)
+CORS(app, supports_credentials=True)
 
 users = {
     "admin": "admin",
@@ -61,9 +61,12 @@ def authorize():
                     "reason": token
                 })
                 if data.get("cookie"):
-                    response.set_cookie("kaguya_token", token)
-                else:
-                    return response
+                    response.set_cookie(
+                        key="kaguya_token",
+                        value=token,
+                        path="/"
+                    )
+                return response
         return jsonify({
             "status": 401,
             "reason": "Unauthorized"
@@ -73,6 +76,20 @@ def authorize():
             "Bad Request",
             status=400,
         )
+
+
+@app.route('/api/verify', methods=['GET'])
+def web_client_verify():
+    identification = request.cookies.get("kaguya_token")
+    if identification in tokens:
+        return jsonify({
+            "status": 200,
+            "reason": tokens[identification]
+        })
+    return jsonify({
+        "status": 401,
+        "reason": "Unauthorized"
+    })
 
 
 @app.route('/api/verify', methods=['POST'])

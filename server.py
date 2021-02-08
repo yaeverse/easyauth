@@ -94,17 +94,16 @@ def web_client_verify():
 
 @app.route('/api/verify', methods=['POST'])
 def verify():
-    if request.is_json:
-        data = request.get_json()
-        if "authToken" not in data:
+    if request.form:
+        if "authToken" not in request.form:
             return jsonify({
                 "status": 400,
                 "reason": "Bad Request"
             })
-        if data["authToken"] in tokens:
+        if request.form["authToken"] in tokens:
             return jsonify({
                 "status": 200,
-                "reason": tokens[data["authToken"]]
+                "reason": tokens[request.form["authToken"]]
             })
         return jsonify({
             "status": 401,

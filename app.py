@@ -1,20 +1,6 @@
-"""
-    Kaguya - The opensource instant messaging framework.
-    ---
-    Copyright 2021 Star Inc.(https://starinc.xyz)
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-"""
+# Yaeverse EastAuth - A simple authentication server.
+# The software licensed under Mozilla Public License Version 2.0
+# (c) 2024 Star Inc.
 
 from flask import Flask, request, Response, jsonify
 from flask_cors import CORS
@@ -36,10 +22,10 @@ tokens = {}
 @app.route('/')
 def about():
     return """
-    <b>Kaguya - Authorizatn</b>
+    <b>Yaeverse EastAuth</b>
     <hr />
-    <p>The API Server is used for authorize and verify the identity for Kaguya.</p>
-    <p>(c)2021 Star Inc.</p>
+    <p>A simple authentication server.</p>
+    <p>(c) 2024 Star Inc.</p>
     """
 
 

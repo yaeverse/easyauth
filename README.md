@@ -1,19 +1,43 @@
-# Kaguya Authorization Example
+# Yaeverse EastAuth
 
-The opensource instant messaging framework.
+A simple authentication server.
 
-![logo](logo.svg)
+![logo](logo.png)
 
-# Authorized  Flow
+## Authorized  Flow
 
-All of Kaguya needs to do that transfers the messages only, keep clean while authorized.
+1. User login with username and password.
+2. Server verify the username and password.
+3. Server generate a token and return to the user.
+4. User use the token to access the resources.
 
-![Flow](flow.svg)
+![authorized flow](flow.svg)
 
-## Development Execute
+## Deploy
+
+Deploy the project to the server.
+
+### Requirements
+
+Here are the requirements to deploy the project.
+
+- python 3.6+
+- pip
+
+### Install
+
+Follow the steps below to install the project.
 
 ```shell
-FLASK_APP=server.py flask run
+pip install -r requirements.txt
+```
+
+### Development
+
+Run the following command to start the development server.
+
+```shell
+flask run
 ```
 
 ## Default Users
@@ -25,18 +49,6 @@ FLASK_APP=server.py flask run
 
 ## License
 
-```license
-    Copyright 2020 Star Inc.(https://starinc.xyz)
+The software licensed under Mozilla Public License Version 2.0
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-```
+[LICENSE](LICENSE)
